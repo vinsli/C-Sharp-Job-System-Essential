@@ -42,6 +42,7 @@ JobSystemDemos/**/*.csproj
 JobSystemDemos/**/*.sln
 JobSystemDemos/**/packages-lock.json
 JobSystemDemos/**/Library
+JobSystemDemos/**/UserSettings
 
 PerformanceTestResults.json
 PerformanceTestResults.json.meta
