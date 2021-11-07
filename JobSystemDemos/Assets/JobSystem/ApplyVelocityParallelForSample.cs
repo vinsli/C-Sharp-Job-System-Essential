@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Collections;
 using Unity.Jobs;
+using UnityEngine.Profiling;
 
 class ApplyVelocityParallelForSample : MonoBehaviour
 {
@@ -23,15 +24,15 @@ class ApplyVelocityParallelForSample : MonoBehaviour
         public void Execute(int i)
         {
             // Move the positions based on delta time and velocity
-            position[i] = position[i+1] + velocity[i] * deltaTime;
+            position[i] = position[i] + velocity[i] * deltaTime;
         }
     }
 
     public void Update()
     {
-        var position = new NativeArray<Vector3>(500, Allocator.Persistent);
+        var position = new NativeArray<Vector3>(50000, Allocator.Persistent);
 
-        var velocity = new NativeArray<Vector3>(500, Allocator.Persistent);
+        var velocity = new NativeArray<Vector3>(50000, Allocator.Persistent);
         for (var i = 0; i < velocity.Length; i++)
             velocity[i] = new Vector3(0, 10, 0);
 
@@ -42,16 +43,22 @@ class ApplyVelocityParallelForSample : MonoBehaviour
             position = position,
             velocity = velocity
         };
-
+        
+        Profiler.BeginSample("Job.Run");
         // Schedule job to run immediately on main thread. First parameter is how many for-each iterations to perform.
         job.Run(position.Length);
-
-
+        Profiler.EndSample();
+        
+        Profiler.BeginSample("Job.Schedule");
         JobHandle sheduleJobDependency = new JobHandle();
         JobHandle sheduleJobHandle = job.Schedule(position.Length, sheduleJobDependency);
-        JobHandle sheduleParralelJobHandle = job.ScheduleParallel(position.Length, 64, sheduleJobHandle);
+        sheduleJobHandle.Complete();
+        Profiler.EndSample();
         
+        Profiler.BeginSample("Job.ScheduleParallel");
+        JobHandle sheduleParralelJobHandle = job.ScheduleParallel(position.Length, 64, sheduleJobHandle);
         sheduleParralelJobHandle.Complete();
+        Profiler.EndSample();
 
         
         Debug.Log(job.position[0]);
