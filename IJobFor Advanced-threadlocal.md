@@ -2,7 +2,7 @@
 
 这节让我们一起来思考一个游戏中比较常见的例子——随机数的使用。
 
-这在以前是一个很简单的问题，因为Unity其实已经为我们准备好了响应的函数封装——[**UnityEngine.Random**](https://docs.unity3d.com/ScriptReference/Random.html),我们只需要调用相应的API就可以了。
+这在以前是一个很简单的问题，因为Unity其实已经为我们准备好了响应的函数封装——[**UnityEngine.Random**](https://docs.unity3d.com/ScriptReference/Random.html)，我们只需要调用相应的API就可以了。
 
 但是在多线程环境下这种情况发生了一些变化。其实从Unity文档中我们就可以总结出**UnityEngine.Random**有以下特点：
 
