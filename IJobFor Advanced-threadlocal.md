@@ -46,9 +46,9 @@ var randomVelocityJob = new RandomVelocityJob
 };
 ```
 
-在上一节Demo的基础上，我们希望每次position移动的方向是随机的，于是我们加入了一个新的Random变量在每次执行**Execute()**方法的时候去随机一个新的方向去做位置计算。代码非常简单明了，但是却隐藏着问题。
+在上一节Demo的基础上，我们希望每次position移动的方向是随机的，于是我们加入了一个新的Random变量在每次执行**Execute\(\)**方法的时候去随机一个新的方向去做位置计算。代码非常简单明了，但是却隐藏着问题。
 
-问题来自于**random**变量，虽然**NextFloat3Direction()**看上去人畜无害，但是他会改变**random**的内部状态，这就导致了所有的worker线程会共享并改变**random**的状态，使random处在竞争条件（race condition）的状态。
+问题来自于**random**变量，虽然**NextFloat3Direction\(\)**看上去人畜无害，但是他会改变**random**的内部状态，这就导致了所有的worker线程会共享并改变**random**的状态，使random处在竞争条件（race condition）的状态。
 
 我们需要找到一种线程安全的方式来使用**random**变量。
 
@@ -67,7 +67,7 @@ for (int i = 0; i < m_Randoms.Length; i++)
 ```
 
 在Job中我们需要知道当前执行的线程ID，我们可以在Job中声明一个int类型的变量并添加**[NativeSetThreadIndex]**属性，在job执行的过程中Unity会帮我们自动注入这个ID。
-这样我们就可以在**Execute()**方法中利用线程ID获取线程独有的资源了。
+这样我们就可以在**Execute\(\)**方法中利用线程ID获取线程独有的资源了。
 
 ```C#
 struct RandomVelocityJob : IJobFor
