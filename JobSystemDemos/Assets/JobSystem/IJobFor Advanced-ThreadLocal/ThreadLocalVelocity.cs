@@ -12,31 +12,10 @@ namespace JobSystem.IJobFor_Advanced_ThreadLocal
 {
     public class ThreadLocalVelocity : MonoBehaviour
     {
-        // struct RandomVelocityJob : IJobFor
-        // {
-        //     [ReadOnly]
-        //     public NativeArray<float> speeds;
-        //
-        //     [ReadOnly]
-        //     [NativeDisableParallelForRestriction]
-        //     public NativeArray<Random> randoms;
-        //
-        //     [NativeSetThreadIndex]
-        //     private int m_ThreadIdx;
-        //
-        //     public float deltaTime;
-        //
-        //     //output
-        //     public NativeArray<float3> positions;
-        //
-        //     public void Execute(int i)
-        //     {
-        //         positions[i] += randoms[m_ThreadIdx].NextFloat3Direction() * speeds[i] * deltaTime;
-        //     }
-        // }
         [BurstCompile]
         struct RandomVelocityJob : IJobFor
         {
+            //input
             [ReadOnly]
             public NativeArray<float> speeds;
             [ReadOnly]
