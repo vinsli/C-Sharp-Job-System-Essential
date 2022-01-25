@@ -1,0 +1,4 @@
+# NativeSetThreadIndexAttribut
+# NativeDisableUnsafePtrRestrictionAttribute
+# NativeDisableParallelForRestrictionAttribute
+# c# interlocked

@@ -2,25 +2,20 @@ using UnityEngine;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine.Profiling;
+using Random = Unity.Mathematics.Random;
 
 class ApplyVelocityParallelForSample : MonoBehaviour
 {
     struct VelocityJob : IJobFor
     {
-        // Jobs declare all data that will be accessed in the job
-        // By declaring it as read only, multiple jobs are allowed to access the data in parallel
         [ReadOnly]
         public NativeArray<Vector3> velocity;
-
-        // By default containers are assumed to be read & write
         public NativeArray<Vector3> position;
 
-        // Delta time must be copied to the job since jobs generally don't have concept of a frame.
-        // The main thread waits for the job same frame or next frame, but the job should do work deterministically
-        // independent on when the job happens to run on the worker threads.
+        public Random random;
+        
         public float deltaTime;
-
-        // The code actually running on the job
+        
         public void Execute(int i)
         {
             // Move the positions based on delta time and velocity

@@ -1,0 +1,3 @@
+# NativeDisableUnsafePtrRestrictionAttribute
+# NativeDisableParallelForRestrictionAttribute
+# c# interlocked
