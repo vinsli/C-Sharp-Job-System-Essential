@@ -92,4 +92,6 @@ struct RandomVelocityJob : IJobFor
 }
 ```
 
+[完整代码](https://github.com/vinsli/C-Sharp-Job-System-Essential/blob/main/JobSystemDemos/Assets/JobSystem/IJobFor%20Advanced-ThreadLocal/ThreadLocalVelocity.cs)
+
 经过简单的几步我们就实现了一个TLS。希望可以给大家带来一些启发。
