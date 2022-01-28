@@ -54,7 +54,7 @@ handle.Complete();
 Debug.Log($"result = {result[0]}");
 ```
 
-调度（Schedule）一个Job是比较简单的，只需要调用Schedule()方法就可以了。这里比较有意思的是Complete()方法，在我们需要读取执行结果之前需要调用Complete()方法。但是Complete()不一定在Schedule()之后立即调用，也不一定在当前帧必须调用，也就是说一个Job本身不受Update()限制可以跨帧运行。当一个Job需要跨帧运行的时候，我们需要使用IsCompleted属性来判断Job是否执行完毕。
+调度（Schedule）一个Job是比较简单的，只需要调用``Schedule()``方法就可以了。这里比较有意思的是Complete()方法，在我们需要读取执行结果之前需要调用``Complete()``方法。但是``Complete()``不一定在``Schedule()``之后立即调用，也不一定在当前帧必须调用，也就是说一个Job本身不受``Update()``限制可以跨帧运行。当一个Job需要跨帧运行的时候，我们需要使用``IsCompleted``属性来判断Job是否执行完毕。
 
 ```C#
 private void Update()
@@ -67,7 +67,7 @@ private void Update()
 }
 ```
 
->注：即使IsCompleted返回true，也必须要调用Complete()方法。具体可以参考[C# Job System tips and troubleshooting](https://docs.unity3d.com/Manual/JobSystemTroubleshooting.html)
+>注：即使``IsCompleted``返回true，也必须要调用``Complete()``方法。具体可以参考[C# Job System tips and troubleshooting](https://docs.unity3d.com/Manual/JobSystemTroubleshooting.html)
 
 这样我们就实现了了一个最简单的Job，这里我给出完整的Demo代码，方便大家进一步理解上面介绍的内容：
 
@@ -193,7 +193,7 @@ public class MyCounterJobBehaviour : MonoBehaviour
 2. struct中的数据必须是blittable的或者是NativeContainer
 3. 要实现IJob接口
 
-这些限制条件其实都是为了一个目的，就是要把C#中的Job数据复制到native层，最终由native job system去执行job中的逻辑。想到这其实我们的答案也就显而易见了，Execute()方法中修改的其实只是我们CounterJob的一个副本，并不是原始的CounterJob。因此当我们需要从Job中获得计算结果的时候，我们需要使用**NativeContainer**，否则会得到不正确的结果。下面是正确的写法：
+这些限制条件其实都是为了一个目的，就是要把C#中的Job数据复制到native层，最终由native job system去执行job中的逻辑。想到这其实我们的答案也就显而易见了，Execute()方法中修改的其实只是我们CounterJob的一个副本，并不是原始的CounterJob。因此当我们需要从Job中获得计算结果的时候，我们需要使用``NativeContainer``，否则会得到不正确的结果。下面是正确的写法：
 
 ```C#
 using Unity.Collections;
@@ -247,8 +247,8 @@ public class CounterJobBehaviour : MonoBehaviour
 }
 ```
 
-到这里我们就已经把C# Job System以及IJob大概了解了一下，相信大家应该已经注意到了，IJob只能跑在单一工作（Worker）线程上，如果想要利用全部的工作（Worker）线程就需要用到我们下一节要介绍的另外一个接口了，那就是**IJobFor**。
+到这里我们就已经把C# Job System以及IJob大概了解了一下，相信大家应该已经注意到了，IJob只能跑在单一工作（Worker）线程上，如果想要利用全部的工作（Worker）线程就需要用到我们下一节要介绍的另外一个接口了，那就是``IJobFor``。
 
-好，以上就是本节所有的内容了，下一节我们讲继续讨论Job的另一种形式：**IJobFor**。
+好，以上就是本节所有的内容了，下一节我们讲继续讨论Job的另一种形式：``IJobFor``。
 
 感谢大家的耐心阅读😙
