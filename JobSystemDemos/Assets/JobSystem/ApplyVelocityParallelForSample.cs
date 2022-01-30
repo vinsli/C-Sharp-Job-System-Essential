@@ -12,8 +12,6 @@ class ApplyVelocityParallelForSample : MonoBehaviour
         public NativeArray<Vector3> velocity;
         public NativeArray<Vector3> position;
 
-        public Random random;
-        
         public float deltaTime;
         
         public void Execute(int i)
@@ -45,14 +43,14 @@ class ApplyVelocityParallelForSample : MonoBehaviour
         Profiler.EndSample();
         
         Profiler.BeginSample("Job.Schedule");
-        JobHandle sheduleJobDependency = new JobHandle();
-        JobHandle sheduleJobHandle = job.Schedule(position.Length, sheduleJobDependency);
-        sheduleJobHandle.Complete();
+        JobHandle scheduleJobDependency = new JobHandle();
+        JobHandle scheduleJobHandle = job.Schedule(position.Length, scheduleJobDependency);
+        scheduleJobHandle.Complete();
         Profiler.EndSample();
         
         Profiler.BeginSample("Job.ScheduleParallel");
-        JobHandle sheduleParralelJobHandle = job.ScheduleParallel(position.Length, 64, sheduleJobHandle);
-        sheduleParralelJobHandle.Complete();
+        JobHandle scheduleParallelJobHandle = job.ScheduleParallel(position.Length, 64, scheduleJobHandle);
+        scheduleParallelJobHandle.Complete();
         Profiler.EndSample();
 
         

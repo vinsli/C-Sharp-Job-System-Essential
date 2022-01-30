@@ -52,17 +52,18 @@ namespace JobSystem.IJobForAdvanced_Batches
                 position = m_Positions,
                 velocity = m_Velocity
             };
+            
             var batchCount = 1;
             Profiler.BeginSample($"Batch = {batchCount}");
             job.ScheduleParallel(m_Positions.Length, batchCount, new JobHandle()).Complete();
             Profiler.EndSample();
 
-            batchCount = 10;
+            batchCount = 8;
             Profiler.BeginSample($"Batch = {batchCount}");
             job.ScheduleParallel(m_Positions.Length, batchCount, new JobHandle()).Complete();
             Profiler.EndSample();
             
-            Debug.Log($"Cache line size = {JobsUtility.CacheLineSize}");
+            // Debug.Log($"Cache line size = {JobsUtility.CacheLineSize}");
             // var batchCount = JobsUtility.CacheLineSize * UnsafeUtility.SizeOf<float3>() ;
 
             batchCount = 16;
