@@ -1,6 +1,6 @@
 # Pointers & InterLocked
 
-这一节我们来改造一下最开始的[CounterJob](What_is_C_Sharp_JobSystem.md)利用IJobFor接口开实现并行求和。
+这一节我们来改造一下最开始的[CounterJob]([What_is_C_Sharp_JobSystem.md](https://github.com/vinsli/C-Sharp-Job-System-Essential/blob/main/JobSystemDemos/Assets/JobSystem/CounterJobBehaviour.cs))利用IJobFor接口开实现并行求和。
 
 我们先来一个Naive版本，来一起思考一下这个Job中的问题：
 
