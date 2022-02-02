@@ -153,3 +153,5 @@ private void Update()
 OK，现在一切都符合我们的预期了😁。
 
 One more thing，在2019.3中增加了[JobsUtility.JobWorkerCount](https://docs.unity3d.com/ScriptReference/Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobWorkerCount.html)接口，来调节当前可以执行Job的worker数量。这在移动平台（尤其是安卓）也非常有用，大家可以自行查看。
+
+[完整代码](https://github.com/vinsli/C-Sharp-Job-System-Essential/blob/main/JobSystemDemos/Assets/JobSystem/IJobForAdvanced-CustomBatches/CustomBatches.cs)
