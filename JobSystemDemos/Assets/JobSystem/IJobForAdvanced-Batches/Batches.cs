@@ -6,6 +6,7 @@ using Unity.Jobs.LowLevel.Unsafe;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Profiling;
+using Random = Unity.Mathematics.Random;
 
 namespace JobSystem.IJobForAdvanced_Batches
 {
@@ -32,10 +33,10 @@ namespace JobSystem.IJobForAdvanced_Batches
         private void Start()
         {
             m_Positions = new NativeArray<float3>(POSITION_COUNT, Allocator.Persistent);
-
+            var rand = new Random(7632);
             m_Velocity = new NativeArray<float3>(POSITION_COUNT, Allocator.Persistent);
             for (var i = 0; i < m_Velocity.Length; i++)
-                m_Velocity[i] = new float3(0, 10, 0);
+                m_Velocity[i] = math.normalize(rand.NextFloat3());
         }
 
         private void OnDestroy()
