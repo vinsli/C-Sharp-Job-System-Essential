@@ -116,3 +116,13 @@ public unsafe struct InterlockedParallelCounterJob : IJobFor
 这里值得一提的是，``Interlocked.Add()``方法需要一个``ref``变量，我们需要将``sum``指针转换成``ref``变量，而``UnsafeUtility.AsRef()``正好就是我们需要的。[UnsafeUtility](https://docs.unity3d.com/ScriptReference/Unity.Collections.LowLevel.Unsafe.UnsafeUtility.html)类提供了很多大家书写native代码的封装，大家有需要可以优先找一下这里是否已经有了你需要的方法实现。
 
 [完整代码](https://github.com/vinsli/C-Sharp-Job-System-Essential/blob/main/JobSystemDemos/Assets/JobSystem/IJobForAdvanced-ParallelCounter/ParallelCounter.cs)
+
+【文章目录】
+
+1. [什么是C# Job System](https://developer.unity.cn/projects/61f68b70edbc2a16f7df9e83)
+2. [IJobFor](https://developer.unity.cn/projects/61f8dbd9edbc2a16f7dfc1d9)
+3. [Thread Local](https://developer.unity.cn/projects/61f9e8f0edbc2a16f7dfd115)
+4. Pointers & InterLocked
+5. [Batches & False sharing](https://developer.unity.cn/projects/61fc0a73edbc2a001cf954a3)
+6. [Custom batch & Kick jobs](https://developer.unity.cn/projects/61fdd19eedbc2a16f7e01124)
+7. SoA vs AoS

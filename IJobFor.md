@@ -132,3 +132,13 @@ struct VelocityJob : IJobFor
 稍微总结一下就是，在当前多核心架构当道的大环境下，我们应该尽量使用IJobFor.ScheduleParallel来把任务拆分到多个核心去做并行计算，只有这样我们才能最大化我们程序的执行效率。
 
 好了，以上就是IJobFor的基本用法了，很简单不是么😉，下一节让我们来用IJobFor做一点不一样的东西。
+
+【文章目录】
+
+1. [什么是C# Job System](https://developer.unity.cn/projects/61f68b70edbc2a16f7df9e83)
+2. IJobFor
+3. [Thread Local](https://developer.unity.cn/projects/61f9e8f0edbc2a16f7dfd115)
+4. [Pointers & InterLocked](https://developer.unity.cn/projects/61fa9ecdedbc2a16f7dfe0f6)
+5. [Batches & False sharing](https://developer.unity.cn/projects/61fc0a73edbc2a001cf954a3)
+6. [Custom batch & Kick jobs](https://developer.unity.cn/projects/61fdd19eedbc2a16f7e01124)
+7. SoA vs AoS

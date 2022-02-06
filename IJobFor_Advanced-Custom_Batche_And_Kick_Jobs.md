@@ -1,4 +1,4 @@
-# Custom batch and kick jobs
+# Custom batch & Kick jobs
 
 上一节我们分享了batch大小对性能的影响，Demo可以比较好的说明问题，但是在实际项目中我们常常需要自己控制batch的大小，比如我们希望根据根节点的transform信息更新子节点的位置信息，这时候``IJobFor``接口中index的限制就比较大了，这一节我们就来介绍如何打破``IJobFor``接口的限制，从而允许我们自己来管理batch。
 
@@ -155,3 +155,13 @@ OK，现在一切都符合我们的预期了😁。
 One more thing，在2019.3中增加了[JobsUtility.JobWorkerCount](https://docs.unity3d.com/ScriptReference/Unity.Jobs.LowLevel.Unsafe.JobsUtility.JobWorkerCount.html)接口，来调节当前可以执行Job的worker数量。这在移动平台（尤其是安卓）也非常有用，大家可以自行查看。
 
 [完整代码](https://github.com/vinsli/C-Sharp-Job-System-Essential/blob/main/JobSystemDemos/Assets/JobSystem/IJobForAdvanced-CustomBatches/CustomBatches.cs)
+
+【文章目录】
+
+1. [什么是C# Job System](https://developer.unity.cn/projects/61f68b70edbc2a16f7df9e83)
+2. [IJobFor](https://developer.unity.cn/projects/61f8dbd9edbc2a16f7dfc1d9)
+3. [Thread Local](https://developer.unity.cn/projects/61f9e8f0edbc2a16f7dfd115)
+4. [Pointers & InterLocked](https://developer.unity.cn/projects/61fa9ecdedbc2a16f7dfe0f6)
+5. [Batches & False sharing](https://developer.unity.cn/projects/61fc0a73edbc2a001cf954a3)
+6. Custom batch & Kick jobs
+7. SoA vs AoS

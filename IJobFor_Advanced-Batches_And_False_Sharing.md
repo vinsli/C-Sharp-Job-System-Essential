@@ -98,3 +98,13 @@ struct VelocityJob : IJobFor
 ``velocity``和``position``都是float3类型，他的大小是4 \* 3 = 12字节，我这台电脑的cache line大小是64字节，不难得出 12 \* 16 == 64 \* 3 == 192，因此当batch大小是16的倍数时我们可以完整的利用我们的cache line，可以有效的避免伪共享（false sharing）问题。
 
 [完整代码](https://github.com/vinsli/C-Sharp-Job-System-Essential/blob/main/JobSystemDemos/Assets/JobSystem/IJobForAdvanced-Batches/Batches.cs)
+
+【文章目录】
+
+1. [什么是C# Job System](https://developer.unity.cn/projects/61f68b70edbc2a16f7df9e83)
+2. [IJobFor](https://developer.unity.cn/projects/61f8dbd9edbc2a16f7dfc1d9)
+3. [Thread Local](https://developer.unity.cn/projects/61f9e8f0edbc2a16f7dfd115)
+4. [Pointers & InterLocked](https://developer.unity.cn/projects/61fa9ecdedbc2a16f7dfe0f6)
+5. Batches & False sharing
+6. [Custom batch & Kick jobs](https://developer.unity.cn/projects/61fdd19eedbc2a16f7e01124)
+7. SoA vs AoS
