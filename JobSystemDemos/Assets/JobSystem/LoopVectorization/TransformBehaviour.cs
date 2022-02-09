@@ -10,9 +10,7 @@ using Random = Unity.Mathematics.Random;
 
 namespace JobSystem.LoopVectorization
 {
-    public class TrandformBehaviour : MonoBehaviour
-    {
-        public unsafe class TransformBehaviour : MonoBehaviour
+    public unsafe class TransformBehaviour : MonoBehaviour
     {
         [BurstCompile]
         public struct TransformAoSJob : IJobFor
@@ -129,21 +127,21 @@ namespace JobSystem.LoopVectorization
                 velocity = m_Velocity,
                 deltaTime = Time.deltaTime
             }.ScheduleParallel(m_TransformSoA.positions.Length, 64, new JobHandle()).Complete();
-            
+
             new TransformAoSJob
             {
                 transformAoSes = m_TransformAoSes,
                 velocity = m_Velocity,
                 deltaTime = Time.deltaTime
             }.ScheduleParallel(m_TransformAoSes.Length, 64, new JobHandle()).Complete();
-            
+
             new TransformSoAJobVectorized
             {
                 positions = m_TransformSoA.positions,
                 velocity = m_Velocity,
                 deltaTime = Time.deltaTime
             }.Schedule().Complete();
-            
+
             new TransformSoAParallelJobVectorized
             {
                 positions = m_TransformSoA.positions,
@@ -151,6 +149,5 @@ namespace JobSystem.LoopVectorization
                 deltaTime = Time.deltaTime
             }.ScheduleBatch(m_TransformSoA.positions.Length, 512).Complete();
         }
-    }
     }
 }
